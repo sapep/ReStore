@@ -4,7 +4,7 @@ interface Props {
   message?: string;
 }
 
-function LoadingComponent({ message = "Loading..." }) {
+function LoadingComponent({ message = "Loading..." }: Props) {
   return (
     <Backdrop open={true} invisible={true}>
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh">

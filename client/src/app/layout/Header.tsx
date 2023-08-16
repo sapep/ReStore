@@ -1,7 +1,7 @@
 import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, Box, Container, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useStoreContext } from "../context/StoreContext";
+import { useAppSelector } from "../store/configureStore";
 
 const midLinks = [
   { title: 'catalog', path: '/catalog' },
@@ -32,7 +32,7 @@ interface Props {
 }
 
 function Header({ darkMode, toggleTheme }: Props) {
-  const { basket } = useStoreContext();
+  const { basket } = useAppSelector(state => state.basket);
 
   const itemCount = basket?.items.reduce((sum, item) => {
     return sum + item.quantity;
