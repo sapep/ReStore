@@ -9,7 +9,7 @@ function AboutPage() {
     agent.TestErrors.getValidationError()
       .then(() => console.log("should not see this"))
       .catch(error => setValidationErrors(error));
-  };
+  }
 
   return (
     <Container>

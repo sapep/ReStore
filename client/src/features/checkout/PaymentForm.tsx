@@ -14,7 +14,7 @@ interface Props {
   onCardInputChange: (event: any) => void;
 }
 
-export default function PaymentForm({ cardState, onCardInputChange }: Props) {
+export default function PaymentForm({ cardState, onCardInputChange }: Props) {
   const { control } = useFormContext();
 
   return (

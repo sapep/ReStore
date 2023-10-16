@@ -31,12 +31,14 @@ function ProductDetails() {
   }
 
   function handleUpdateCart() {
-    if (!item || quantity > item.quantity) {
+    if (!product) return;
+
+    if (!item || quantity > item.quantity) {
       const updatedQuantity = item ? quantity - item.quantity : quantity;
-      dispatch(addBasketItemAsync({ productId: product?.id!, quantity: updatedQuantity }))
+      dispatch(addBasketItemAsync({ productId: product.id, quantity: updatedQuantity }))
     } else {
       const updatedQuantity = item.quantity - quantity;
-      dispatch(removeBasketItemAsync({ productId: product?.id!, quantity: updatedQuantity }))
+      dispatch(removeBasketItemAsync({ productId: product.id, quantity: updatedQuantity }))
     }
   }
 
@@ -50,7 +52,7 @@ function ProductDetails() {
         <img
           src={product.pictureUrl}
           alt={product.name}
-          style={{ width: "100%" }} 
+          style={{ width: "100%" }}
         />
       </Grid>
       <Grid item xs={6}>

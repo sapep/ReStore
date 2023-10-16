@@ -70,12 +70,14 @@ export default function CheckoutPage() {
   }, [methods]);
 
   async function submitOrder(data: FieldValues) {
+    if (!basket) return;
+
     setLoading(true);
     const { nameOnCard, saveAddress, ...shippingAddress } = data;
     if (!stripe || !elements) return; // Stripe is not ready
     try {
       const cardElement = elements.getElement(CardNumberElement);
-      const paymentResult = await stripe.confirmCardPayment(basket?.clientSecret!, {
+      const paymentResult = await stripe.confirmCardPayment(basket.clientSecret!, {
         payment_method: {
           card: cardElement!,
           billing_details: {
@@ -94,7 +96,7 @@ export default function CheckoutPage() {
         dispatch(clearBasket());
       } else {
         console.log("Payment was not successful");
-        setPaymentMessage(paymentResult.error?.message!);
+        setPaymentMessage(paymentResult.error?.message || "Payment failed");
         setPaymentSucceeded(false);
         setActiveStep(activeStep + 1);
       }
@@ -102,7 +104,7 @@ export default function CheckoutPage() {
       console.log(error);
     }
     setLoading(false);
-  };
+  }
 
   const handleNext = async (data: FieldValues) => {
     if (activeStep === steps.length - 1) {

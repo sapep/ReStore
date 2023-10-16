@@ -29,7 +29,7 @@ export const fetchBasketAsync = createAsyncThunk<Basket>(
   }
 );
 
-export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, quantity?: number}>(
+export const addBasketItemAsync = createAsyncThunk<Basket, { productId: number, quantity?: number }>(
   'basket/addBasketItemAsync',
   async ({ productId, quantity = 1 }, thunkAPI) => {
     try {
@@ -40,13 +40,13 @@ export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, q
   }
 );
 
-export const removeBasketItemAsync = createAsyncThunk<void, {productId: number, quantity: number, name?: string}>(
+export const removeBasketItemAsync = createAsyncThunk<void, { productId: number, quantity: number, name?: string }>(
   'basket/removeBasketItemAsync',
   async ({ productId, quantity }, thunkAPI) => {
     try {
       await agent.Basket.removeItem(productId, quantity);
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.data })
+      return thunkAPI.rejectWithValue({ error: error.data })
     }
   }
 );
@@ -62,7 +62,7 @@ export const basketSlice = createSlice({
       state.basket = null;
     }
   },
-  extraReducers:(builder => {
+  extraReducers: (builder => {
     builder.addCase(addBasketItemAsync.pending, (state, action) => {
       state.status = "pendingAddItem" + action.meta.arg.productId;
     });
@@ -73,7 +73,7 @@ export const basketSlice = createSlice({
       const { productId, quantity } = action.meta.arg;
       const itemIndex = state.basket?.items.findIndex(i => i.productId === productId);
 
-      if (itemIndex === -1 || itemIndex === undefined) return;
+      if (itemIndex === -1 || itemIndex === undefined) return;
 
       state.basket!.items[itemIndex].quantity -= quantity;
 
@@ -94,7 +94,7 @@ export const basketSlice = createSlice({
       state.status = "idle";
       console.log(action.payload)
     });
-  }) 
+  })
 });
 
 export const { setBasket, clearBasket } = basketSlice.actions;

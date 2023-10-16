@@ -12,7 +12,7 @@ import { fetchCurrentUser } from "../../features/account/accountSlice";
 function App() {
   const dispatch = useAppDispatch();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
   const initApp = useCallback(async () => {
@@ -26,8 +26,8 @@ function App() {
 
   useEffect(() => {
     initApp().then(() => setLoading(false));
-  }, []);
-  
+  }, [initApp]);
+
   const paletteType = darkMode ? 'dark' : 'light'
   const theme = createTheme({
     palette: {
@@ -40,7 +40,7 @@ function App() {
 
   function toggleTheme() {
     setDarkMode(!darkMode);
-  };
+  }
 
   if (loading) return <LoadingComponent message="Initializing..." />
 

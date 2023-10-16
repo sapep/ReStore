@@ -7,8 +7,8 @@ interface Props {
   onChange: (items: string[]) => void;
 }
 
-export default function CheckboxButtons({ items, checked, onChange }: Props) {
-  const [checkedItems, setCheckedItems] = useState(checked || []);
+export default function CheckboxButtons({ items, checked, onChange }: Props) {
+  const [checkedItems, setCheckedItems] = useState(checked || []);
 
   function handleChecked(value: string) {
     const currentIndex = checkedItems.findIndex(item => item === value);

@@ -11,7 +11,6 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { useAppDispatch } from '../../app/store/configureStore';
 import { signInUser } from './accountSlice';
-import { toast } from 'react-toastify';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -28,9 +27,9 @@ export default function Login() {
   async function submitForm(data: FieldValues) {
     try {
       await dispatch(signInUser(data));
-      navigate(location.state?.from || "/catalog");
+      navigate(location.state?.from || "/catalog");
     } catch (e) {
-      console.log(e); 
+      console.log(e);
     }
   }
 

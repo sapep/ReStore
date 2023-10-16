@@ -13,7 +13,7 @@ function ServerError() {
             {state.error.title}
           </Typography>
           <Divider />
-          <Typography variant="body1">{state.error.detail || "Internal server error"}</Typography>
+          <Typography variant="body1">{state.error.detail || "Internal server error"}</Typography>
         </>
       )}
     </Container>

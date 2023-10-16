@@ -11,7 +11,7 @@ interface CatalogState {
   brands: string[];
   types: string[];
   productParams: ProductParams;
-  metaData: MetaData | null;
+  metaData: MetaData | null;
 }
 
 const productsAdapter = createEntityAdapter<Product>();

@@ -26,7 +26,7 @@ axios.interceptors.response.use(async response => {
   }
   return response;
 }, (error: AxiosError) => {
-  let { data, status } = error.response as AxiosResponse;
+  const { data, status } = error.response as AxiosResponse;
 
   switch (status){
     case 400:
@@ -56,8 +56,8 @@ axios.interceptors.response.use(async response => {
 
 const requests = {
   get: (url: string, params?: URLSearchParams) => axios.get(url, {params}).then(responseBody),
-  post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
-  put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
+  post: (url: string, body: object) => axios.post(url, body).then(responseBody),
+  put: (url: string, body: object) => axios.put(url, body).then(responseBody),
   delete: (url: string) => axios.delete(url).then(responseBody),
 };
 
